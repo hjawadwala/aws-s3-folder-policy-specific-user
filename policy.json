@@ -1,0 +1,54 @@
+{
+	"Version": "2012-10-17",
+	"Id": "Policy1639545114688",
+	"Statement": [
+		{
+			"Sid": "Stmt1639545003392",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "[USER-ARN]"
+			},
+			"Action": "s3:ListBucket",
+			"Resource": "[BUCKET-ARN]",
+			"Condition": {
+				"StringEquals": {
+					"s3:prefix": [
+						"",
+						"[FOLDERNAME]"
+					]
+				}
+			}
+		},
+		{
+			"Sid": "Stmt1639545058320",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "[USER-ARN]"
+			},
+			"Action": "s3:ListBucket",
+			"Resource": "[BUCKET-ARN]",
+			"Condition": {
+				"StringLike": {
+					"s3:prefix": "[FOLDERNAME]/*"
+				}
+			}
+		},
+		{
+			"Sid": "Stmt1639545112632",
+			"Effect": "Allow",
+			"Principal": {
+				"AWS": "[USER-ARN]"
+			},
+			"Action": [
+				"s3:GetObject",
+				"s3:GetObjectAcl",
+				"s3:GetObjectVersion",
+				"s3:GetObjectVersionAcl",
+				"s3:PutObject",
+				"s3:PutObjectTagging",
+				"s3:PutObjectVersionAcl"
+			],
+			"Resource": "[BUCKET-ARN]/[FOLDERNAME]/*"
+		}
+	]
+}
